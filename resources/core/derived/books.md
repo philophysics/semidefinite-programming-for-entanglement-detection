@@ -1,1 +1,0 @@
-Quantum Cryptography and Computing: Theory and Implementation

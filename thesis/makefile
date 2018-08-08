@@ -11,6 +11,7 @@ all:
 	rm main.lof
 	rm main.log
 	rm main.lot
+	rm main.out
 	rm main.run.xml
 	rm main.toc
 	rm main-blx.bib

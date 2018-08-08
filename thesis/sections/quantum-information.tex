@@ -1,0 +1,436 @@
+\section{Wprowadzenie do kwantowej teorii informacji}
+
+Podamy tutaj najważniejsze elementy mechaniki kwantowej -- te, które interesować nas będą z perspektywy zastosowań mechaniki kwantowej w teorii informacji.
+
+\subsection{Stany kwantowe}
+
+W ujęciu ogólnym stan układu kwantowego dany jest \textit{funkcją falową}, tzn. funkcją zespoloną zależną od parametru czasu i biorącą również wartości z \textit{przestrzeni konfiguracyjnej} badanego układu (ma ona spełniać odpowiednie równanie różniczkowe -- w przypadku nierelatywistycznej mechaniki kwantowej jest to równanie Schr\"{o}dingera). Nie będziemy się tym ogólnym podejściem zajmować (jednak dla wygody także w skończonym wymiarze używać będziemy pojęcia ``funkcja falowa'' w odniesieniu do obiektu opisującego stan układu). W przypadku skończenie wymiarowym odpowiednikiem funkcji falowej jest wektor z przestrzeni $V ^ n(\mathbb{C})$ lub macierz (operator liniowy) z przestrzeni $M_{n \times n}(\mathbb{C})$. Oba przypadki rozważamy poniżej. Przyjmijmy też pewną umowę:
+
+\begin{convention}
+    \label{convention:space}
+    W dalszych rozważaniach mówiąc ``przestrzeń Hilberta'' mamy na myśli przestrzeń
+
+    \begin{equation}
+        \label{equation:states}
+        \mathcal{H} \equiv V^n(\mathbb{C}).
+    \end{equation}
+
+    Wtedy sprzężona z nią przestrzeń Hilberta--Schmidta
+
+    \begin{equation}
+        \label{equation:operators}
+        \mathcal{HS} \equiv M_{n \times n}(\mathbb{C}).
+    \end{equation}
+\end{convention}
+
+Opis przeprowadzimy dokonując podziału na układy kwantowe \textit{pojedyncze} i \textit{złożone} -- podamy matematyczną strukturę tych ostatnich. Uprzedzając jednak fakty (wynikające z tej struktury) powiedzmy najpierw, że to, czy dany obiekt matematyczny mający opisać pewien rzeczywisty układ kwantowy potraktujemy jako pojedynczy bądź złożony (w sensie poniższych definicji) można niekiedy przyjąć jako sprawę umowy (i wygody w obliczeniach). Bywa jednak też tak, że rozróżnienia dokonują same prawa fizyki i nie ma możliwości nagiąć do nich opisywanego przez nas formalizmu.
+
+\subsubsection{Układy pojedyncze}
+
+\paragraph{Stany czyste układów pojedynczych}
+
+\begin{definition}[Stany czyste]
+    \strut
+    \begin{enumerate}
+        \item Stanem czystym pojedynczego układu kwantowego nazywamy unormowany wektor
+
+            $$
+                \ket{\psi} = \sum\limits_{i} \psi_{i} \ket{i}
+            $$
+ 
+            z przestrzeni $\mathcal{H}$ z bazą ortonormalną
+
+            $$
+                \mathcal{B} = \{\ket{i}\}_{i \in I}, I = \{0, 1, \ldots, n - 1\},
+            $$
+
+            której elementy nazywamy \textit{stanami bazowymi}
+
+        \item Ponadto, prawdopodobieństwo tego, że stan $\ket{\psi}$ występuje w stanie $\ket{i}$ definiuje się jako
+
+            \begin{equation}
+                \label{equation:finding}
+                p(\ket{i}|\ket{\psi}) \equiv |\psi_i| ^ 2.
+            \end{equation}
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    Druga część powyższej definicji zostanie wyjaśniona w pełni po wprowadzeniu pomiaru von Neumanna.
+\end{remark}
+
+\paragraph{Stany mieszane układów pojedynczych -- operator gęstości}
+
+\begin{definition}[Stany mieszane]
+    Jeżeli pojedynczy układ kwantowy z prawdopodobieństwem $p_i$ znajduje się w stanie czystym $\ket{\psi_i}$, to jego stan opisuje operator liniowy na $\mathcal{H}$, nazywany \textit{operatorem gęstości}. Jest on postaci
+
+    $$
+        \rho \equiv \sum\limits_{i} p_i \ket{\psi_i} \bra{\psi_i}, 0 \leq p_i \leq 1, \sum\limits_{i} p_i = 1.
+    $$
+\end{definition}
+
+\begin{remark}
+    Jeżeli stan kwantowy opisywany operatorem gęstości z prawdopodobieństwem $1$ znajduje się w pewnym stanie czystym $\ket{\psi}$ (wtedy $\rho = \ket{\psi} \bra{\psi}$), to taki stan również nazywamy czystym.
+\end{remark}
+
+\begin{remark}
+    Oznaczamy też $ p_i = p(\ket{\psi_i})$.
+\end{remark}
+
+\begin{remark}
+    W mechanice kwantowej rozważa się też takie stany mieszane, które same są mieszanką innych stanów mieszanych, tzn. jeżeli układ z prawdopodobieństwem $p(\rho_i)$ opisany jest przez stan $\rho_i$, to całkowity operator gęstości ma postać
+
+    $$
+        \rho_\Sigma \equiv \sum\limits_{i} p(\rho_i) \rho_i.
+    $$
+
+    W naszych rozważaniach przyjmujemy jednak, że wprowadzając stan mieszany $\rho$ nie traktujemy go jako część takiej mieszanki, tzn. wystąpienie stanu $\rho$ jest zdarzeniem pewnym: 
+
+    $$
+        p(\rho) = 1.
+    $$
+\end{remark}
+
+\begin{theorem}[Charakteryzacja operatorów gęstości]
+    \label{theorem:characterization}
+    Operator $\rho$ działający na przestrzeni Hilberta $\mathcal{H}$ jest operatorem gęstości wtedy i tylko wtedy, gdy
+
+    \begin{enumerate}
+        \item $\textbf{Tr}[\rho] = 1$
+        \item $\rho$ jest operatorem dodatnio określonym
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    ``$\Longrightarrow$'' Niech $\rho = \sum\limits_{i} p_{i} \ket{\psi_i} \bra{\psi_i}$. Wtedy
+
+    $$
+        \textbf{Tr}[\rho] = \sum\limits_{i} p_{i} \textbf{Tr}[\ket{\psi_i} \bra{\psi_i}] = \sum\limits_{i} p_{i} = 1.
+    $$
+
+    Niech teraz $\ket{\psi} \in \mathcal{H}$ będzie dowolnym wektorem. Wtedy
+
+    $$
+        \bra{\psi} \rho \ket{\psi} = \bra{\psi} \left(\sum\limits_{i} p_{i} \ket{\psi_i} \bra{\psi_i}\right) \ket{\psi}
+    $$
+
+    $$
+        = \sum\limits_{i} p_{i} \bra{\psi}\ket{\psi_i} \bra{\psi_i}\ket{\psi} = \sum\limits_{i} p_{i} |\bra{\psi}\ket{\psi_i}| ^ 2 \geq 0.
+    $$
+
+    ``$\Longleftarrow$'' Ponieważ $\rho$ jest operatorem dodatnio określonym, to ma rozkład spektralny (zob. twierdzenie \ref{theorem:positive} i wniosek \ref{corollary:hermitian}) postaci
+
+    $$
+        \rho = \sum\limits_{j} \lambda_{j} \ket{j} \bra{j},
+    $$
+
+    gdzie $\lambda_j$ są nieujemnymi (zob. twierdzenie \ref{theorem:positivevalues}) wartościami własnymi operatora $\rho$. Dodatkowo, ponieważ $\textbf{Tr}[\rho] = 1$, to $\sum\limits_{j} \lambda_{j} = 1$. Oznacza to, że $\rho$ jest operatorem gęstości.
+\end{proof}
+
+Widać z powyższych definicji, że podstawowym obiektem opisującym w przestrzeniach o skończonym wymiarze układy kwantowe jest w najprostszy sposób rozumiany wektor z $V ^ n(\mathbb{C})$. Konstrukcja funkcji falowej w oparciu o tę przestrzeń jest też konstrukcją w pełni ogólną (w skończonym wymiarze) -- pojęcie operatora gęstości wywodzi się bowiem z pojęcia stanu czystego (pokażemy później, że z definicji pomiaru kwantowego na stanie czystym jako odpowiedniego zbioru trójek \textit{(wartość, prawdopodobieństwo, kolaps)} wynika postać tego zbioru w scenariuszu pomiaru na stanie mieszanym). Ponadto każdy operator gęstości staje się kolumną liczb w bazie złożonej z operatorów gęstości. Widać wobec tego jeszcze wyraźniej umowność tego, co nazwiemy ``początkową'' przestrzenią Hilberta, w której zanurzone będą funkcje falowe układu. Można powiedzieć, że za obiekt opisujący układ kwantowy przyjmuje się to, czym w odniesieniu do tego układu najwygodniej się posługiwać -- wszystko zależy od stopnia abstrakcji koniecznej do opisu (a także od tego, jaka część pełnej informacji o układzie jest potrzebna). Powtarzamy naszą umowę \ref{convention:space} stanowiącą, że w całych niniejszych rozważaniach stoimy w punkcie ``zerowym'' w hierarchii abstrakcji opisu układu kwantowego, tzn. za ``początkową'' przestrzeń Hilberta uznajemy przestrzeń (\ref{equation:states}). W oparciu o nią budujemy przestrzeń (\ref{equation:operators}) operatorów gęstości.
+
+\subsubsection{Układy złożone}
+
+Punktem wyjściowym do rozważań z niniejszego paragrafu jest -- jak już o tym wspominaliśmy -- potrzeba traktowania niektórych układów kwantowych jako złożonych z wielu mniejszych części. Warto w tym miejscu nieco uściślić sam formalizm dotyczący pojêcia \textit{układu kwantowego} -- będziemy przez niego rozumieć abstrakcyjny obiekt (wciąż mający jednak przedstawiać rzeczywiste zjawisko) oznaczany np. $A$ i mający właściwość polegającą na możliwości jego \textit{opisu} rozumianego przez wygenerowanie z niego teorii według procedury przedstawionej w poprzednim paragrafie (z całą jej dowolnością -- tzn. przyjętą przestrzenią Hilberta).
+
+Rozważać będziemy teraz $N$ takich układów kwantowych, z których każdy oznaczymy $A_1, A_2, \ldots, A_N$. Związane są z nimi przestrzenie Hilberta $\mathcal{H}_{A_i} = V ^ {n_i}(\mathbb{C})$, którym odpowiadają bazy ortonormalne $\ket{j^{(A_i)}}$.
+
+\begin{definition}[Układ złożony]
+    \label{definition:complex-system}
+    Działaniem służącym połączeniu przestrzeni stanów $\mathcal{H}_{A_i}$ podukładów $A_i$ w nową przestrzeń stanów jest iloczyn tensorowy. Otrzymujemy więc przestrzeń
+
+    $$
+        \mathcal{H} = \mathcal{H}_{A_1} \otimes \mathcal{H}_{A_2} \otimes \ldots \otimes \mathcal{H}_{A_N}.
+    $$
+
+    Gdy zbiór funkcji falowych $\psi ^ {(A_i)}$ podukładów jest dany, to funkcja falowa układu złożonego wyraża się przez ich iloczyn tensorowy:
+
+    \begin{equation}
+        \label{equation:productstate}
+        \psi=\psi ^ {(A_1)} \otimes \psi ^ {(A_2)} \otimes \ldots \otimes \psi^{(A_N)}.
+    \end{equation}
+\end{definition}
+
+W poniższych szczegółowych rozważaniach wprowadzamy układ złożony z jedynie dwóch podukładów: $A$ i $B$, którym odpowiadają przestrzenie
+
+$$
+    (\mathcal{H}_A, \ket{i^{(A)}})
+$$
+
+oraz
+
+$$
+    (\mathcal{H}_B, \ket{j^{(B)}}).
+$$
+
+Interesować nas będzie wobec tego przypadek układu \textit{dwuczęściowego} (\textit{bipartite}):
+
+$$
+    \mathcal{H}_{AB} = \mathcal{H}_{A} \otimes \mathcal{H}_{B}.
+$$
+
+\begin{remark}
+    Dla $\mathcal{H}_A = V ^ n(\mathbb{C})$ i $\mathcal{H}_B = V ^ m(\mathbb{C})$ pisze się w skrócie
+
+    \begin{equation}
+        \label{equation:bipartite}
+        \mathcal{H}_{AB} = n \otimes m.
+    \end{equation}
+\end{remark}
+
+\paragraph{Stany czyste układów złożonych}
+
+Ogólny wektor stanu w przestrzeni $\mathcal{H}_{AB}$ układu złożonego wyraża się w tym przypadku jako
+
+\begin{equation}
+    \label{equation:complexpure}
+    \ket{\psi^{(AB)}} = \sum\limits_{ij} c_{ij} \ket{i^{(A)}} \ket{j^{(B)}}.
+\end{equation}
+
+Korzystając z (\ref{equation:productstate}), jeżeli stany podukładów $A$ i $B$ są dane i równe $\ket{\psi^{(A)}}$, $\ket{\psi^{(B)}}$ odpowiednio, to stan układu złożonego $AB$ dany jest jako
+
+$$
+    \ket{\psi^{(AB)}} = \ket{\psi^{(A)}} \otimes \ket{\psi^{(B)}}.
+$$
+
+Ze względu na rozbicie przestrzeni $\mathcal{H}_{AB}$ na dwie klasy stanów czystych (zob. Uwaga \ref{remark:classes}) wprowadza się następującą definicję:
+
+\begin{definition}
+    Jeżeli stan czysty $\ket{\psi^{(AB)}} \in \mathcal{H}_{AB}$ da się zapisać w postaci
+
+    $$
+        \ket{\psi} = \ket{\psi ^ {(A)}} \ket{\psi ^ {(B)}}
+    $$
+
+    dla pewnych stanów czystych $\ket{\psi ^ {(A)}} \in \mathcal{H}_A$ i $\ket{\psi ^ {(B)}} \in \mathcal{H}_B$, to stan $\ket{\psi^{(AB)}}$ nazywamy separowalnym. W przeciwnym razie nazywamy go stanem splątanym.
+\end{definition}
+
+\begin{example}[Stan splątany]
+    Przykładem stanu splątanego w przestrzeni $\mathcal{H} = V ^ 2(\mathbb{C}) \otimes V ^ 2(\mathbb{C})$ jest jeden ze stanów Bella:
+
+    \begin{equation}
+        \label{equation:bellstate}
+        \ket{\Phi ^ {+}} \equiv \frac{\ket{00} + \ket{11}}{\sqrt{2}} = \frac{1}{\sqrt{2}}
+        \begin{pmatrix}
+            1 \\
+            0 \\
+            0 \\
+            1
+        \end{pmatrix}.
+    \end{equation}
+
+    Okazuje się, że nie da się go przedstawić w postaci iloczynu $\ket{\psi} \ket{\phi}$ dowolnych dwóch stanów czystych z przestrzeni $V ^ 2(\mathbb{C})$. Niech bowiem
+
+    $$
+        \ket{\psi} \equiv
+        \begin{pmatrix}
+            a \\
+            b \\
+        \end{pmatrix}
+    $$
+
+    i
+
+    $$
+        \ket{\phi} \equiv
+        \begin{pmatrix}
+            c \\
+            d \\
+        \end{pmatrix}.
+    $$
+
+    Wtedy
+
+    $$
+        \ket{\psi} \ket{\phi} =
+        \begin{pmatrix}
+            ac \\
+            ad \\
+            bc \\
+            bd \\
+        \end{pmatrix}.
+    $$
+
+    Otrzymujemy wobec tego układ warunków: $ac = \frac{1}{\sqrt{2}}$, $ad = 0$, $bc = 0$, $bd = \frac{1}{\sqrt{2}}$. Widać od razu, że jest on sprzeczny.
+\end{example}
+
+\paragraph{Stany mieszane układów złożonych}
+
+W przypadku stanów mieszanych stan układu złożonego definiuje się jako operator gęstości $\rho ^ {(AB)}$ działający na przestrzeni $\mathcal{H}_{AB}$. Nazywa się go wtedy \textit{łącznym} operatorem gęstości. Niech na przestrzeniach Hilberta $\mathcal{H}_{A}$ i $\mathcal{H}_{B}$ dane są ortonormalne bazy $\{\ket{a_{i}}\}_{i \in [n_{A}]}$ oraz $\{\ket{b_{j}}\}_{j \in [n_{B}]}$. Wtedy (zob. (\ref{equation:elements})) łączny operator gęstości definiujemy ogólnie jako
+
+\begin{equation}
+    \label{equation:complexmixed}
+    \rho ^ {(AB)} \equiv \sum\limits_{i, k \in [n_{A}]; j, l \in [n_{B}]} \rho_{\stackrel{ij}{kl}} ^ {(AB)} \ket{a_{i}} \bra{a_{k}} \otimes \ket{b_{j}} \bra{b_{l}},
+\end{equation}
+
+gdzie $\rho_{\stackrel{ij}{kl}} ^ {(AB)}$ jest odpowiednim elementem macierzowym.
+
+Podobnie jak dla stanów czystych, korzystając z Definicji \ref{definition:complex-system} mamy, że jeżeli dane są operatory gęstości podukładów, to stan układu z nich złożonego wyznaczony jest przez stan produktowy (zob. Uwaga \ref{remark:product-vector}):
+
+\begin{equation}
+    \label{equation:mixedproduct}
+    \rho ^ {(AB)} = \rho ^ {(A)} \otimes \rho ^ {(B)}.
+\end{equation}
+
+Definicja stanu separowalnego zostaje jednak dla stanów mieszanych rozszerzona w stosunku do przypadku stanów czystych -- za taki stan uważa się nie tylko produkt dwóch stanów, ale każdą wypukłą kombinację produktów.
+
+\begin{definition}
+    Jeżeli operator gęstości $\rho ^ {(AB)}$ działający na przestrzeni $\mathcal{H}_A \otimes \mathcal{H}_B$ da się zapisać w postaci 
+
+    \begin{equation}
+        \label{equation:separable}
+        \rho ^ {(AB)} = \sum\limits_{i} p_{i} \rho_{i} ^ {(A)} \otimes \rho_{i} ^ {(B)}, 0 \leq p_i \leq 1, \sum\limits_{i} p_i = 1,
+    \end{equation}
+
+    gdzie $\rho_{i} ^ {(A)}$, $\rho_{i} ^ {(B)}$ są operatorami gęstości działającymi na przestrzeni $\mathcal{H}_A$, $\mathcal{H}_B$ odpowiednio, to stan mieszany $\rho^{(AB)}$ nazywamy separowalnym. W przeciwnym razie nazywamy go stanem splątanym.
+\end{definition}
+
+\subsection{Separowalność macierzy gęstości}
+
+Okazuje się, że dla układów dwuczęściowych (\ref{equation:bipartite}) ogólnie sprawa rozstrzygnięcia, czy operator gęstości działający na przestrzeni $\mathcal{H}_{AB}$ jest separowalny, jest problemem algorytmicznie NP-trudnym (zob. \cite{rh}). Dla przypadku $n = m = 2$ istnieje jednak bardzo ważne kryterium. Najpierw podamy definicję:
+
+\begin{definition}
+    Niech $\mathcal{H}_{A} = \mathcal{H}_{B} = V ^ {d}(\mathbb{C})$ są przestrzeniami Hilberta z ortonormalnymi bazami
+
+    $$
+        \{\ket{i ^ {(A)}}\}_{i \in \{0, 1, \ldots, d - 1\}}
+    $$
+
+    oraz
+
+    $$
+        \{\ket{j ^ {(B)}}\}_{j \in \{0, 1, \ldots, d - 1\}}.
+    $$ 
+
+    Niech $A$ jest operatorem liniowym działającym na przestrzeni $\mathcal{H}_{AB}$ i niech w bazie 
+
+    $$
+        \mathcal{B}_{AB} \equiv \{\ket{i ^ {(A)}} \ket{j ^ {(B)}}\}_{i, j \in \{0, 1, \ldots, d - 1\}}
+    $$
+
+    jego elementy macierzowe są równe
+
+    $$
+        A \equiv
+        \begin{pmatrix}
+            A_{00} & A_{01} & \cdots & A_{0, d - 1} \\
+            A_{10} & A_{11} & \cdots & A_{1, d - 1 }\\
+            \vdots & \vdots & \vdots & \vdots \\
+            A_{d - 1, 0} & A_{d - 1, 1} & \cdots & A_{d - 1, d - 1}
+        \end{pmatrix},
+    $$
+
+    gdzie $A_{ij} \in M_{d \times d}(\mathbb{C})$.
+
+    Częściową transpozycją operatora $A$ ze względu na podukład $B$ nazywamy operator $A^{\Gamma}$, którego elementy macierzowe w bazie $\mathcal{B}_{AB}$ dane są przez:
+
+    $$
+        A ^ {\Gamma} \equiv
+        \begin{pmatrix}
+            A_{00} ^ {T} & A_{01} ^ {T} & \cdots & A_{0, d - 1} ^ {T} \\
+            A_{10} ^ {T} & A_{11} ^ {T} & \cdots & A_{1, d - 1} ^ {T} \\
+            \vdots & \vdots & \vdots & \vdots \\
+            A_{d - 1, 0} ^ {T} & A_{d - 1, 1} ^ {T} & \cdots & A_{d - 1, d - 1} ^ {T}
+        \end{pmatrix}.
+    $$
+\end{definition}
+
+\begin{fact}
+    \label{fact:partialtranspose}
+    Częściowa transpozycja ze względu na podukład $B$:
+
+    \begin{enumerate}
+        \item Zachowuje hermitowskość operatora
+        \item Zachowuje ślad operatora
+    \end{enumerate}
+\end{fact}
+
+\begin{theorem}[Kryterium Częściowej Transpozycji, zob. \cite{rh}]
+    \label{theorem:ppt}
+    Operator gęstości $\rho$ działający w przestrzeni $2 \otimes 2$ jest stanem separowalnym $\Longleftrightarrow$ operator $\rho ^ {\Gamma}$ jest operatorem gęstości w sensie podanym w charakteryzacji z Twierdzenia \ref{theorem:characterization}.
+\end{theorem}
+
+\begin{fact}
+    Z Wniosku \ref{corollary:iff} i Faktu \ref{fact:partialtranspose} wynika, że aby sprawdzić, że operator $\rho ^ {\Gamma}$ jest operatorem gęstości, wystarczy pokazać, że jego spektrum jest nieujemne.
+\end{fact}
+
+W przypadku operatorów gęstości na układach złożonych wprowadza się też pojęcie \textit{operatora zredukowanego do podukładu}, analogiczne do pojęcia brzegowej gęstości prawdopodobieñstwa łącznej zmiennej losowej (klasycznej).
+
+\begin{definition}
+    Dla danego łącznego operatora gęstości $\rho ^ {(AB)}$ jego śladem częściowym ze względu na podukład B nazywa się operator (okazuje się, że jest on operatorem gęstości)
+
+    \begin{equation}
+        \label{equation:partialtrace}
+        \rho ^ {(A)} \equiv \textbf{Tr}_B[\rho ^ {(AB)}],
+    \end{equation}
+
+    gdzie działanie $\textbf{Tr}_B$ nazywamy śladowaniem częściowym ze względu na podukład B i dla układów dwuczęściowych oraz operatora gęstości postaci (\ref{equation:complexmixed}) definiuje się je następująco:
+
+    $$
+        \textbf{Tr}_{B}[\rho ^ {(AB)}] \equiv \sum\limits_{i, k \in [n_{A}]; j, l \in [n_{B}]} \rho_{\stackrel{ij}{kl}} ^ {(AB)} \ket{a_{i}} \bra{a_{k}} \textbf{Tr}[\ket{b_{j}} \bra{b_{l}}]
+    $$
+
+    \begin{equation}
+        \label{equation:partial}
+        = \sum\limits_{i, k \in [n_{A}]; j, l \in [n_{B}]} \rho_{\stackrel{ij}{kl}} ^ {(AB)} \ket{a_{i}} \bra{a_{k}} \bra{b_{l}}\ket{b_{j}}.
+    \end{equation}
+\end{definition}
+
+Operator $\rho ^ {(A)}$ powstały z $\rho ^ {(AB)}$ w wyniku śladowania ze względu na podukład $B$ opisuje podukład $A$, tzn. jest jego operatorem gęstości.
+
+\begin{fact}
+    Jeżeli stan $\rho ^ {(AB)}$ jest stanem produktowym (\ref{equation:mixedproduct}), to
+
+    \begin{equation}
+        \textbf{Tr}_B[\rho ^ {(A)} \otimes \rho ^ {(B)}] = \rho ^ {(A)}.
+    \end{equation}
+\end{fact}
+
+\begin{proof}
+    Niech
+
+    $$
+        \rho ^ {(A)} = \sum\limits_{i} p_{i} \ket{\psi_{i} ^ {(A)}} \bra{\psi_{i}^{(A)}}
+    $$
+
+    oraz
+
+    $$
+        \rho ^ {(B)} = \sum\limits_{j} q_{j} \ket{\psi_{j}^{(B)}} \bra{\psi_{j}^{(B)}}.
+    $$
+
+    Wtedy
+
+    $$
+        \textbf{Tr}_B\left[\left(\sum\limits_{i} p_{i} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}}\right) \otimes \left(\sum\limits_{j} q_{j} \ket{\psi_{j}^{(B)}} \bra{\psi_{j}^{(B)}}\right)\right]
+    $$
+
+    $$
+        = \textbf{Tr}_B\left[\sum\limits_{ij} p_{i} q_{j} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}} \otimes \ket{\psi_{j}^{(B)}} \bra{\psi_{j}^{(B)}}\right]
+    $$
+
+    $$
+        = \sum\limits_{ij} p_{i} q_{j} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}} \underbrace{\bra{\psi_{j}^{(B)}}\ket{\psi_{j}^{(B)}}}_{1}
+    $$
+
+    $$
+        = \left(\sum\limits_{i} p_{i} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}}\right) \underbrace{\left(\sum\limits_{j} q_{j}\right)}_{1} = \rho ^ {(A)}.
+    $$
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

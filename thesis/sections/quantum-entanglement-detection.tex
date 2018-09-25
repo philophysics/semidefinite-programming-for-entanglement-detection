@@ -1,0 +1,129 @@
+\section{Wykrywanie splątania kwantowego}
+
+\subsection{Kryterium Częściowej Transpozycji}
+
+Okazuje się, że dla układów dwuczęściowych (\ref{equation:bipartite}) ogólnie sprawa rozstrzygnięcia, czy operator gęstości działający na przestrzeni $\mathcal{H}_{AB}$ jest separowalny, jest problemem algorytmicznie NP-trudnym (zob. \cite{rh}). Dla przypadku $n = m = 2$ istnieje jednak bardzo ważne kryterium. Najpierw podamy definicję:
+
+\begin{definition}
+    Niech $\mathcal{H}_{A} = \mathcal{H}_{B} = V ^ {d}(\mathbb{C})$ są przestrzeniami Hilberta z ortonormalnymi bazami
+
+    $$
+        \{\ket{i ^ {(A)}}\}_{i \in \{0, 1, \ldots, d - 1\}}
+    $$
+    oraz
+
+    $$
+        \{\ket{j ^ {(B)}}\}_{j \in \{0, 1, \ldots, d - 1\}}.
+    $$ 
+
+    Niech $A$ jest operatorem liniowym działającym na przestrzeni $\mathcal{H}_{AB}$ i niech w bazie
+
+    $$
+        \mathcal{B}_{AB} \equiv \{\ket{i ^ {(A)}} \ket{j ^ {(B)}}\}_{i, j \in \{0, 1, \ldots, d - 1\}}
+    $$
+    jego elementy macierzowe są równe
+
+    $$
+        A \equiv
+        \begin{pmatrix}
+            A_{00} & A_{01} & \cdots & A_{0, d - 1} \\
+            A_{10} & A_{11} & \cdots & A_{1, d - 1 }\\
+            \vdots & \vdots & \vdots & \vdots \\
+            A_{d - 1, 0} & A_{d - 1, 1} & \cdots & A_{d - 1, d - 1}
+        \end{pmatrix},
+    $$
+    gdzie $A_{ij} \in M_{d \times d}(\mathbb{C})$.
+
+    Częściową transpozycją operatora $A$ ze względu na podukład $B$ nazywamy operator $A^{\Gamma}$, którego elementy macierzowe w bazie $\mathcal{B}_{AB}$ dane są przez:
+
+    $$
+        A ^ {\Gamma} \equiv
+        \begin{pmatrix}
+            A_{00} ^ {T} & A_{01} ^ {T} & \cdots & A_{0, d - 1} ^ {T} \\
+            A_{10} ^ {T} & A_{11} ^ {T} & \cdots & A_{1, d - 1} ^ {T} \\
+            \vdots & \vdots & \vdots & \vdots \\
+            A_{d - 1, 0} ^ {T} & A_{d - 1, 1} ^ {T} & \cdots & A_{d - 1, d - 1} ^ {T}
+        \end{pmatrix}.
+    $$
+\end{definition}
+
+\begin{fact}
+    \label{fact:partialtranspose}
+    Częściowa transpozycja ze względu na podukład $B$:
+
+    \begin{enumerate}
+        \item Zachowuje hermitowskość operatora
+        \item Zachowuje ślad operatora
+    \end{enumerate}
+\end{fact}
+
+\begin{theorem}[Kryterium Częściowej Transpozycji, zob. \cite{rh}]
+    \label{theorem:ppt}
+    Operator gęstości $\rho$ działający w przestrzeni $2 \otimes 2$ jest stanem separowalnym $\Longleftrightarrow$ operator $\rho ^ {\Gamma}$ jest operatorem gęstości w sensie podanym w charakteryzacji z Twierdzenia \ref{theorem:characterization}.
+\end{theorem}
+
+\begin{fact}
+    Z Wniosku \ref{corollary:iff} i Faktu \ref{fact:partialtranspose} wynika, że aby sprawdzić, że operator $\rho ^ {\Gamma}$ jest operatorem gęstości, wystarczy pokazać, że jego spektrum jest nieujemne.
+\end{fact}
+
+W przypadku operatorów gęstości na układach złożonych wprowadza się też pojęcie \textit{operatora zredukowanego do podukładu}, analogiczne do pojęcia brzegowej gęstości prawdopodobieństwa łącznej zmiennej losowej (klasycznej).
+
+\begin{definition}
+    Dla danego łącznego operatora gęstości $\rho ^ {(AB)}$ jego śladem częściowym ze względu na podukład B nazywa się operator (okazuje się, że jest on operatorem gęstości)
+
+    \begin{equation}
+        \label{equation:partialtrace}
+        \rho ^ {(A)} \equiv \textbf{Tr}_B[\rho ^ {(AB)}],
+    \end{equation}
+    gdzie działanie $\textbf{Tr}_B$ nazywamy śladowaniem częściowym ze względu na podukład B i dla układów dwuczęściowych oraz operatora gęstości postaci (\ref{equation:complexmixed}) definiuje się je następująco:
+
+    $$
+        \textbf{Tr}_{B}[\rho ^ {(AB)}] \equiv \sum\limits_{i, k \in [n_{A}]; j, l \in [n_{B}]} \rho_{\stackrel{ij}{kl}} ^ {(AB)} \ket{a_{i}} \bra{a_{k}} \textbf{Tr}[\ket{b_{j}} \bra{b_{l}}]
+    $$
+
+    \begin{equation}
+        \label{equation:partial}
+        = \sum\limits_{i, k \in [n_{A}]; j, l \in [n_{B}]} \rho_{\stackrel{ij}{kl}} ^ {(AB)} \ket{a_{i}} \bra{a_{k}} \bra{b_{l}}\ket{b_{j}}.
+    \end{equation}
+\end{definition}
+
+Operator $\rho ^ {(A)}$ powstały z $\rho ^ {(AB)}$ w wyniku śladowania ze względu na podukład $B$ opisuje podukład $A$, tzn. jest jego operatorem gęstości.
+
+\begin{fact}
+    Jeżeli stan $\rho ^ {(AB)}$ jest stanem produktowym (\ref{equation:mixedproduct}), to
+
+    \begin{equation}
+        \textbf{Tr}_B[\rho ^ {(A)} \otimes \rho ^ {(B)}] = \rho ^ {(A)}.
+    \end{equation}
+\end{fact}
+
+\begin{proof}
+    Niech
+
+    $$
+        \rho ^ {(A)} = \sum\limits_{i} p_{i} \ket{\psi_{i} ^ {(A)}} \bra{\psi_{i}^{(A)}}
+    $$
+    oraz
+
+    $$
+        \rho ^ {(B)} = \sum\limits_{j} q_{j} \ket{\psi_{j}^{(B)}} \bra{\psi_{j}^{(B)}}.
+    $$
+
+    Wtedy
+
+    $$
+        \textbf{Tr}_B\left[\left(\sum\limits_{i} p_{i} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}}\right) \otimes \left(\sum\limits_{j} q_{j} \ket{\psi_{j}^{(B)}} \bra{\psi_{j}^{(B)}}\right)\right]
+    $$
+
+    $$
+        = \textbf{Tr}_B\left[\sum\limits_{ij} p_{i} q_{j} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}} \otimes \ket{\psi_{j}^{(B)}} \bra{\psi_{j}^{(B)}}\right]
+    $$
+
+    $$
+        = \sum\limits_{ij} p_{i} q_{j} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}} \underbrace{\bra{\psi_{j}^{(B)}}\ket{\psi_{j}^{(B)}}}_{1}
+    $$
+
+    $$
+        = \left(\sum\limits_{i} p_{i} \ket{\psi_{i}^{(A)}} \bra{\psi_{i}^{(A)}}\right) \underbrace{\left(\sum\limits_{j} q_{j}\right)}_{1} = \rho ^ {(A)}.
+    $$
+\end{proof}

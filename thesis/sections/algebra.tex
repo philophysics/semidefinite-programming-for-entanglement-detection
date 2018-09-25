@@ -1,8 +1,28 @@
-\section{Podstawy algebraiczne}
+\section{Wprowadzenie do informatyki kwantowej}
 
 \subsection{Przestrzeń Hilberta}
 
-Weźmy przestrzeń liniową wymiaru $n$ nad $\mathbb{C}$ i wyposażmy ją w iloczyn skalarny. Tak powstałą strukturę nazwiemy \textit{przestrzenią Hilberta} (ogólnie, tzn. nie skonkretyzowaną w żaden sposób przestrzeń Hilberta oznaczać będziemy $\mathcal{H}$). Element (wektor) tej przestrzeni oznaczamy $\ket{\psi}$, natomiast iloczyn skalarny pomiędzy dwoma wektorami $\ket{\psi}, \ket{\phi} \in \mathcal{H}$ oznaczymy $\bra{\psi}\ket{\phi}$ (taka konwencja określana jest mianem \textit{notacji Diraca}). Przypomnijmy jeszcze, że na przestrzeni Hilberta indukowana jest za pomocą iloczynu skalarnego \textit{norma} wektora, standardowo $||\psi|| \equiv \sqrt{\bra{\psi}\ket{\psi}}$.
+Podamy tutaj definicję przestrzni Hilberta. Najpierw jednak przypomnimy definicję \textit{normy}.
+
+\begin{definition}[Norma]
+    Niech $X$ jest przestrzenią liniową nad ciałem $F$ liczb rzeczywistych lub zespolonych. \textit{Normą} nazywamy odwzorowanie $||\cdot||: X \rightarrow [0, + \infty]$ takie, że $\forall a \in F$, $\forall x, y \in X$:
+
+    \begin{enumerate}
+        \item $||x + y|| \leq ||x|| + ||y||$
+        \item $||a x|| = |a| \cdot ||x||$
+        \item $||x|| = 0 \Rightarrow x = 0$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Przestrzeń Hilberta]
+    \textit{Przestrzenią Hilberta} nazywamy przestrzeń liniową wyposażoną w iloczyn skalarny.
+\end{definition}
+
+W dalszych rozważaniach będziemy zakładać, że wymiar przestrzni Hilberta jest skończony i wynosi $n$. Element (wektor) tej przestrzeni oznaczamy $\ket{\psi}$, natomiast iloczyn skalarny pomiędzy dwoma wektorami $\ket{\psi}, \ket{\phi} \in \mathcal{H}$ oznaczymy $\bra{\psi}\ket{\phi}$ (taka konwencja określana jest mianem \textit{notacji Diraca}). Przypomnijmy jeszcze, że na przestrzeni Hilberta norma indukowana jest za pomocą iloczynu skalarnego w następujący sposób:
+
+\begin{equation}\label{equation:norm}
+    ||\psi|| \equiv \sqrt{\bra{\psi}\ket{\psi}}.
+\end{equation}
 
 \subsubsection{Baza kanoniczna}
 
@@ -20,7 +40,6 @@ $$
         0
     \end{pmatrix},
 $$
-
 gdzie nad współczynnikiem $1$ znajduje się $i$ zer.
 
 Dowolny wektor $\ket{\psi} \in \mathcal{H}$ zapiszemy teraz jako
@@ -29,7 +48,7 @@ $$
     \ket{\psi} = \sum\limits_{i \in I} \psi_{i}\ket{i}.
 $$
 
-Założenie o skończonym wymiarze przestrzeni skutkuje wygodną reprezentacją w bazie $\mathcal{B}$ abstrakcyjnego wektora z przestrzeni Hilberta jako kolumny jego współczynników: 
+Założenie o skończonym wymiarze przestrzeni skutkuje wygodną reprezentacją w bazie $\mathcal{B}$ abstrakcyjnego wektora z przestrzeni Hilberta jako kolumny jego współczynników:
 
 $$
     \ket{\psi} \equiv
@@ -49,7 +68,6 @@ Przypomnimy obecnie wzór na współczynniki wektora w rozwinięciu w bazie $\ma
 $$
     \bra{i}\ket{j} = \delta_{ij},
 $$
-
 gdzie dwuargumentowa funkcja $\delta_{ij}$, zwana \textit{deltą Kroneckera}:
 
 $$
@@ -65,7 +83,6 @@ Niech więc dowolnie ustalony wektor bazowy $\ket{\alpha}$ zostanie przemnożony
 $$
     \bra{\alpha}\ket{\psi} = \bra{\alpha}\left(\sum\limits_{i}\psi_{i}\ket{i}\right) = \sum\limits_{i}\psi_{i} \bra{\alpha}\ket{i} = \sum\limits_{i}\psi_{i}\delta_{\alpha i}=\psi_{\alpha}
 $$
-
 tzn.
 
 $$
@@ -79,17 +96,15 @@ Iloczyn skalarny wektorów $\ket{\psi}, \ket{\phi} \in \mathcal{H}$ można wyzna
 $$
     \ket{\psi} = \sum\limits_{i\in I}\psi_{i}\ket{i}
 $$
-
 oraz
 
 $$
     \ket{\phi} = \sum\limits_{i\in I}\phi_{i}\ket{i}
 $$
-
 mamy bowiem
 
 $$
-    \bra{\psi}\ket{\phi} = \left(\sum\limits_{i \in I}\psi_{i}\bra{i}\right)\left(\sum\limits_{j\in I}\phi_{j}\ket{j}\right) = \sum\limits_{i, j \in I}\psi_{i} ^ {*}\phi_{j}\bra{i}\ket{j}=\sum\limits_{i \in I}\psi_{i}^{*}\phi_{i}
+    \bra{\psi}\ket{\phi} = \left(\sum\limits_{i \in I}\psi_{i}\ket{i}\right)^{*}\left(\sum\limits_{j\in I}\phi_{j}\ket{j}\right) = \sum\limits_{i, j \in I}\psi_{i} ^ {*}\phi_{j}\bra{i}\ket{j}=\sum\limits_{i \in I}\psi_{i}^{*}\phi_{i}
 $$
 
 \subsubsection{Przestrzeń sprzężona}
@@ -104,7 +119,7 @@ Samo wyrażenie $\bra{\psi}\ket{\phi}$ także w konwencji Diraca traktować moż
     Funkcjonały z przestrzeni sprzężonej są liniowe, ponieważ iloczyn skalarny jest liniowy w drugim argumencie.
 \end{remark}
 
-Okazuje się, że w przestrzeniach Hilberta o wymiarze skończonym występuje wzajemna jednoznaczność bra i ketów, tzn. wektor $\ket{\psi} \in \mathcal{H}$ można rozpatrywać równoważnie jako wektor $\bra{\psi} \in \mathcal{H}^{*}$ powstały z $\ket{\psi}$ na drodze przekształcenia, które w przestrzeniach o skończonym wymiarze wygląda następująco: z reprezentacji wektora jako kolumny współczynników i z formuły na iloczyn skalarny w bazie ortonormalnej mamy, że dla danego keta 
+Okazuje się, że w przestrzeniach Hilberta o wymiarze skończonym występuje wzajemna jednoznaczność bra i ketów, tzn. wektor $\ket{\psi} \in \mathcal{H}$ można rozpatrywać równoważnie jako wektor $\bra{\psi} \in \mathcal{H}^{*}$ powstały z $\ket{\psi}$ na drodze przekształcenia, które w przestrzeniach o skończonym wymiarze wygląda następująco: z reprezentacji wektora jako kolumny współczynników i z formuły na iloczyn skalarny w bazie ortonormalnej mamy, że dla danego keta
 
 $$
     \ket{\psi} =
@@ -115,8 +130,7 @@ $$
         \psi_{n - 1} \\
     \end{pmatrix}
 $$
- 
-odpowiadający mu funkcjonał $\bra{\psi} \in \mathcal{H}^{*}$ można zapisać jako 
+odpowiadający mu funkcjonał $\bra{\psi} \in \mathcal{H}^{*}$ można zapisać jako
 
 $$
     \bra{\psi} = \begin{pmatrix} \psi_{0}^{*} & \psi_{1}^{*} & \ldots & \psi_{n - 1}^{*} \end{pmatrix}.
@@ -156,15 +170,7 @@ Podamy definicje podstawowych baz pojawiających się w kwantowej informatyce.
     $$
 \end{definition}
 
-\subsection{Przestrzeń Hilberta-Schmidta}
-
-Dla danej przestrzeni Hilberta $\mathcal{H}$ z bazą $\mathcal{B}$ wprowadzamy przestrzeń operatorów liniowych $A: \mathcal{H} \rightarrow \mathcal{H}$ z działaniem standardowego dodawania dwóch operatorów i działaniem mnożenia operatora przez liczbę zespoloną. Przestrzeń taka jest przestrzenią liniową. Wyposażamy ją w działanie dwuargumentowe postaci
-
-$$
-    \bra{A}\ket{B} \equiv \textbf{Tr}[A ^ {\dag} B].
-$$
-
-Łatwo pokazać, że tak zdefiniowana funkcja jest iloczynem skalarnym (nazywamy ją iloczynem skalarnym Hilberta--Schmidta) -- przestrzeń operatorów rozszerzyliśmy wobec tego do przestrzeni Hilberta. Nazywamy ją przestrzenią Hilberta-Schmidta sprzężoną z przestrzenią $\mathcal{H}$ i oznaczamy $\mathcal{HS}$.
+\subsection{Przestrzeń operatorów}
 
 \subsubsection{Elementy macierzowe, ślad, komutator}
 
@@ -177,7 +183,6 @@ Przedstawimy podstawowe definicje i własności operatorów.
     $$
         A_{ij} \equiv \bra{i} A \ket{j},
     $$
-
     gdzie $\ket{i}, \ket{j} \in \mathcal{B}$. Ponadto, elementy macierzowe postaci $A_{ii}$ nazywamy elementami diagonalnymi operatora $A$.
 \end{definition}
 
@@ -208,9 +213,17 @@ $$
     Zachodzi
 
     $$
-        \textbf{Tr}[AB] = \textbf{Tr}[BA]
+        \textbf{Tr}[AB] = \textbf{Tr}[BA].
     $$
 \end{theorem}
+
+\begin{proof}
+    Niech $A \in M_{n \cross m}(\mathbb{C})$, $B \in M_{m \cross n}(\mathbb{C})$. Wówczas
+
+    $$
+        \textbf{Tr}[AB] = \sum\limits_{i = 1}^{n} (AB)_{ii} = \sum\limits_{i = 1}^{n} \sum\limits_{j = 1} ^ {m} A_{ij} B_{ji} = \sum\limits_{j = 1} ^{m} \sum\limits_{i = 1} ^{n} B_{ji} A_{ij} = \sum\limits_{j = 1} ^ {m} (BA)_{jj} = \textbf{Tr}[BA].
+    $$
+\end{proof}
 
 Wprowadzimy teraz pojęcie \textit{komutatora} operatorów liniowych.
 
@@ -220,7 +233,6 @@ Wprowadzimy teraz pojęcie \textit{komutatora} operatorów liniowych.
     $$
         [A, B] \equiv A \circ B - B \circ A,
     $$
-
     gdzie działanie $\circ$ oznacza złożenie operatorów (w przypadku skończenie wymiarowym i reprezentacji macierzowej operatora jest to mnożenie macierzy). Ponadto, jeżeli $[A, B] = \hat{0}$ (gdzie $\hat{0}$ jest operatorem zerowym) to mówimy, że operatory $A$ i $B$ komutują.
 
 \end{definition}
@@ -230,7 +242,12 @@ Wprowadzimy teraz pojęcie \textit{komutatora} operatorów liniowych.
 Wprowadzimy pojęcie operatora hermitowskiego i podamy jego podstawowe własności.
 
 \begin{definition}[Sprzężenie hermitowskie]
-    Niech $\ket{\psi}, \ket{\phi} \in \mathcal{H}$, natomiast $A$ niech jest operatorem liniowym z $\mathcal{H}$ do $\mathcal{H}$. Operatorem sprzężonym hermitowsko do $A$ nazywamy operator 
+    Niech $A$ jest operatorem liniowym z $\mathcal{H}$ do $\mathcal{H}$. Operatorem sprzężonym hermitowsko do $A$ nazywamy taki operator $A ^ {\dag}$, że dla każdych $\ket{\psi}, \ket{\phi} \in \mathcal{H}$ zachodzi
+
+    $$
+        \bra{\psi}A\ket{\phi} = \bra{\phi}A^{\dag}\ket{\psi}^{*}.
+    $$
+    W przypadku przestrzeni o skończonym wymiarze definicja ta redukuje się do postaci
 
     $$
         A ^ {\dag} \equiv (A ^ {*}) ^ T = (A ^ {T}) ^ {*}.
@@ -248,6 +265,15 @@ Wprowadzimy pojęcie operatora hermitowskiego i podamy jego podstawowe własnoś
 \begin{theorem}
     Wartości własne operatora hermitowskiego są rzeczywiste.
 \end{theorem}
+
+\begin{proof}
+    Niech $A$ jest operatorem hermitowskim i niech $\ket{\lambda}$ jest wektorem własnym odpowiadającym wartości własnej $\lambda$. Ponieważ $A = A ^ {\dag}$, to
+
+    $$
+        \bra{\lambda} A \ket{\lambda} = \bra{\lambda} A ^ {\dag} \ket{\lambda} ^ {*} = \bra{\lambda} A \ket{\lambda} ^ {*}.
+    $$
+    Skoro $\bra{\lambda} A \ket{\lambda} = \lambda \bra{\lambda}\ket{\lambda}$, to $\lambda \bra{\lambda}\ket{\lambda} = (\lambda \bra{\lambda}\ket{\lambda}) ^ {*} = \lambda ^ {*} \bra{\lambda}\ket{\lambda}$. Wobec tego $\lambda = \lambda ^ {*}$. 
+\end{proof}
 
 \subsubsection{Operatory dodatnio określone}
 
@@ -280,12 +306,11 @@ Wprowadzimy pojęcie i podamy podstawowe własności operatorów dodatnio okreś
 \end{theorem}
 
 \begin{proof}
-    Niech $\ket{\psi} \in \mathcal{H}$ będzie dowolnym wektorem. Wtedy
+    Niech $\ket{\psi} \in \mathcal{H}$ będzie dowolnym wektorem. Wtedy z równania (\ref{equation:norm}) mamy
 
     $$
         \bra{\psi} A ^ {\dag} A \ket{\psi} = \bra{A \psi}\ket{A \psi}=\left\|A \ket{\psi}\right\|^2 \geq 0,
     $$
-
     więc $A ^ {\dag} A$ jest operatorem dodatnio określonym.
 \end{proof}
 
@@ -314,6 +339,17 @@ Okazuje się bowiem, że z twierdzeń \ref{theorem:positive} oraz \ref{theorem:p
     Operator liniowy $A$ jest dodatnio określony $\Longleftrightarrow$ jest dodatni.
 \end{corollary}
 
+\subsubsection{Przestrzeń Hilberta--Schmidta}
+
+Dla danej przestrzeni Hilberta $\mathcal{H}$ z bazą $\mathcal{B}$ wprowadzamy przestrzeń operatorów liniowych $A: \mathcal{H} \rightarrow \mathcal{H}$ z działaniem standardowego dodawania dwóch operatorów i działaniem mnożenia operatora przez liczbę zespoloną. Przestrzeń taka jest przestrzenią liniową. Wyposażamy ją w działanie dwuargumentowe postaci
+
+$$
+    \bra{A}\ket{B} \equiv \textbf{Tr}[A ^ {\dag} B].
+$$
+
+Łatwo pokazać, że tak zdefiniowana funkcja jest iloczynem skalarnym (nazywamy ją iloczynem skalarnym Hilberta--Schmidta) -- przestrzeń operatorów rozszerzyliśmy wobec tego do przestrzeni Hilberta. Nazywamy ją przestrzenią Hilberta-Schmidta sprzężoną z przestrzenią $\mathcal{H}$ i oznaczamy $\mathcal{HS}$.
+
+
 \subsection{Iloczyn tensorowy}
 
 \subsubsection{Definicja ogólna}
@@ -328,12 +364,11 @@ Weźmy dwie przestrzenie Hilberta $\mathcal{H}_{A}$ i $\mathcal{H}_{B}$. Dla wek
     $$
         \mathcal{H}_{AB} \equiv \mathcal{H}_A \otimes \mathcal{H}_B,
     $$
-
     której elementy stanowią wszystkie wektory postaci
 
     \begin{equation}
         \label{equation:product}
-        \ket{C} \equiv \ket{A} \otimes \ket{B}, \textrm{dla } \ket{A} \in \mathcal{H}_A, \ket{B} \in \mathcal{H}_B.
+        \ket{C} \equiv \ket{A} \otimes \ket{B}, \text{dla } \ket{A} \in \mathcal{H}_A, \ket{B} \in \mathcal{H}_B.
     \end{equation}
 
     Dodatkowo, wektory tej przestrzeni stanowią z definicji wszystkie kombinacje liniowe układu wektorów $\left|i^{A}\right\rangle\otimes\left|j^{B}\right\rangle$, tzn. zbiór wektorów postaci
@@ -370,7 +405,7 @@ Weźmy dwie przestrzenie Hilberta $\mathcal{H}_{A}$ i $\mathcal{H}_{B}$. Dla wek
 \end{definition}
 
 \begin{remark}[Oznaczenia]
-    Dla $\ket{A} \in \mathcal{H}_{A}$ i $\ket{B} \in \mathcal{H}_{B}$ oznaczać będziemy 
+    Dla $\ket{A} \in \mathcal{H}_{A}$ i $\ket{B} \in \mathcal{H}_{B}$ oznaczać będziemy
 
     $$
         \ket{A} \otimes \ket{B} \equiv \ket{A} \ket{B}.
@@ -386,13 +421,11 @@ Weźmy dwie przestrzenie Hilberta $\mathcal{H}_{A}$ i $\mathcal{H}_{B}$. Dla wek
     $$
         \ket{A} = \sum\limits_{i} c_i ^ {(A)} \ket{i^{(A)}}
     $$
-
     oraz
 
     $$
         \ket{B} = \sum\limits_{j} c_j ^ {(B)} \ket{j^{(B)}}
     $$
-
     mamy bowiem
 
     $$
@@ -402,7 +435,6 @@ Weźmy dwie przestrzenie Hilberta $\mathcal{H}_{A}$ i $\mathcal{H}_{B}$. Dla wek
     $$
         = \sum\limits_{ij} c_{i} ^ {(A)} c_{j} ^ {(B)} \ket{i ^ {(A)}} \ket{j ^ {(B)}} = \sum\limits_{ij} c_{ij} \ket{i ^ {(A)}} \ket{j ^ {(B)}},
     $$
-
     jeżeli tylko $c_{ij} \equiv c_{i} ^ {(A)} c_{j} ^ {(B)}$.
 
     Implikacja odwrotna jednak nie zachodzi: nie każdy wektor dany w postaci (\ref{equation:entangled}) da się zapisać w postaci (\ref{equation:product}) (podamy później przykład takiego wektora). Ta własność zdefiniowanej przez nas struktury iloczynu tensorowego będzie miała wielkie znaczenie przy wprowadzaniu pojęcia \textit{splątania}.
@@ -425,19 +457,16 @@ Wprowadzimy najpierw pewne działanie wykonywane na macierzach -- rozważane og�
     $$
         A \in M_{p \times q}(\mathbb{C})
     $$
-
     i
 
     $$
         B \in M_{r\times s}(\mathbb{C})
     $$
-
     ich iloczyn Kroneckera zdefiniowany jest jako macierz
 
     $$
         C \in M_{pr\times qs}(\mathbb{C})
     $$
-
     dana wzorem
 
     \begin{equation}
@@ -470,7 +499,6 @@ Wprowadzimy najpierw pewne działanie wykonywane na macierzach -- rozważane og�
             h & i & j
         \end{pmatrix}
     $$
-
     ich iloczyn Kroneckera przyjmuje wartość
 
     $$
@@ -497,7 +525,6 @@ Podamy podstawowe własności iloczynu Kroneckera.
     \begin{equation}
         (A \otimes B) (C \otimes D) = (A C) \otimes (B D),
     \end{equation}
-
     gdzie $\otimes$ jest iloczynem Kroneckera macierzy.
 \end{theorem}
 
@@ -545,7 +572,6 @@ Niech dane są skończenie wymiarowe przestrzenie Hilberta $\mathcal{H}_{A}$ ora
 $$
     \{\ket{a_{i}}\}_{i \in [n_{A}]}
 $$
-
 oraz
 
 $$
@@ -561,7 +587,6 @@ $$
 $$
     j,l \in [n_{B}]
 $$
-
 elementem macierzowym tego operatora w bazie $\{\ket{a_{i}} \ket{b_{j}}\}_{i \in [n_{A}], j \in [n_{B}]}$ przestrzeni złożonej nazywamy liczbę
 
 $$
@@ -604,7 +629,6 @@ Wtedy
 $$
     \ket{\psi} = \left(\sum_{i = 0} ^ {n - 1} \ket{i} \bra{i} \right) \ket{\psi},
 $$
-
 tzn.
 
 \begin{equation}
@@ -670,7 +694,6 @@ Rozważmy operator liniowy $A$ działający w przestrzeni Hilberta $\mathcal{H}$
     $$
         A = \sum\limits_{\lambda \in \sigma(A)} \lambda \Pi_{\lambda},
     $$
-
     gdzie $\sigma(A)$ jest zbiorem różnych wartości własnych operatora $A$, natomiast $\Pi_{\lambda}$ jest projektorem ortonormalnym rzutującym na podprzestrzeń własną odpowiadającą wartości własnej $\lambda$.
 \end{definition}
 
@@ -692,7 +715,6 @@ Ponieważ operator hermitowski jest normalny:
 $$
     A = A ^ {\dag} \Longrightarrow A ^ {\dag} A = A A ^ {\dag} = A ^ 2,
 $$
-
 to z twierdzenia \ref{theorem:spectral} mamy
 
 \begin{corollary}
@@ -712,7 +734,6 @@ Zapiszmy jeszcze prosty fakt.
     $$
         B = \sum\limits_{i = 0} ^ {n - 1} b_{i} \Pi_{i},
     $$
-
     to operatory $A$ i $B$ komutują.
 \end{fact}
 
@@ -749,7 +770,6 @@ Uogólnienia dokonamy dla operatorów produktowych działających w $\mathcal{H}
 $$
     E ^ {(AB)} = E ^ {(A)} \otimes E ^ {(A)},
 $$
-
 gdzie pewne operatory $E ^ {(A)}$, $E ^ {(B)}$ działające na przestrzeni $\mathcal{H}_A$ oraz $\mathcal{H}_B$ same mają rozkłady spektralne
 
 $$
@@ -775,16 +795,12 @@ Definiując $\lambda_{ij} ^ {(AB)} \equiv \lambda_{i} ^ {(A)} \lambda_{j} ^ {(B)
 $$
     E ^ {(AB)} = \sum\limits_{ij} \lambda_{ij} ^ {(AB)} \Pi_{ij} ^ {(AB)},
 $$
-
 gdzie bazą ortonormalnych projektorów jest zbiór
 
 $$
-    \left\{\Pi_{ij} ^ {(AB)}\right\}_{i \in [n_{A}], j \in [n_{B}]}.
+    \left\{\Pi_{ij} ^ {(AB)}\right\}_{i \in [n_{A}], j \in [n_{B}]},
 $$
-
-\begin{remark}
-    Zauważmy jednak, że niekoniecznie wszystkie tak określone wartości własne są różne.
-\end{remark}
+zauważmy jednak, że niekoniecznie wszystkie tak określone wartości własne są różne.
 
 \subsection{Operatory binarne i operatory von Neumanna}
 
@@ -868,6 +884,5 @@ Przytoczymy poniżej kilka podstawowych własności operatorów von Neumana.
     $$
     \hat{v} \cdot \vec{\sigma} = \Pi_{+} - \Pi_{-},
     $$
-
     gdzie $\Pi_{\pm} = \frac{1}{2} (I \pm \hat{v} \cdot \vec{\sigma})$ jest projektorem rzutującym na odpowiednią podprzestrzeń własną.
 \end{fact}

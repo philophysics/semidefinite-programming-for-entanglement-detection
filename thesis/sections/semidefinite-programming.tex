@@ -1,6 +1,6 @@
 \section{Wprowadzenie do programowania półokreślonego}
 
-\begin{definition}[Programowanie półokreślone]
+\begin{definition}[Programowanie półokreślone -- postać pierwotna]
     Ogólne zagadnienie programowania półokreślonego w postaci pierwotnej definiuje się jako
 
     $$
@@ -11,7 +11,6 @@
             \bullet X \geq 0
         \end{cases}
     $$
-
     gdzie
 
     \begin{itemize}
@@ -19,4 +18,25 @@
         \item $C, A_{i} \in M_{n \times n}(\mathbb{R}), i = 1, \ldots , p$ są danymi macierzami symetrycznymi
         \item $b_{i} \in \mathbb{R}, i = 1, \ldots, p$ są danymi liczbami
     \end{itemize}
+\end{definition}
+
+\begin{definition}[Programowanie półokreślone -- postać dualna]
+    $$
+        \begin{cases}
+            \min c ^ {T} x \\
+            \text{ze względu na:} \\
+                \bullet \text{      } F(x) \leq 0 \\
+                \bullet \text{      } A x = b,
+        \end{cases}
+    $$
+    gdzie
+
+    $$
+        F(x) = G + \sum \limits_{i = 1}^{m} x_{i} F_{i}
+    $$
+    dla
+
+    $$
+        x \in \mathbb{R} ^ m; c \in \mathbb{R} ^ {m}; G, F_{1}, \ldots, F_{m} \in \textbf{S} ^ {n}
+    $$
 \end{definition}

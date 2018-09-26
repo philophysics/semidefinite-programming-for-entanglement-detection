@@ -1,0 +1,88 @@
+\section{Przykład wykorzystania programowania pólokreślonego do zweryfikowania separowalności stanu}
+
+\subsection{Środowisko}
+
+Wykorzystano środowisko MATLAB oraz darmową bibliotekę QETLAB (zob. \cite{qetlab}), korzystającej z darmowej biblioteki CVX (zob. \cite{cvx}, \cite{gb08}) będącej rozwiązaniem integrującym najpopularniejsze solvery do programowania półokreślonego dostępne w środowisku MATLAB (zarówno darmowe, jak i komercyjne). Domyślnie instalowanym solverem jest SDPT3 (zob. \cite{sdpt3a}, \cite{sdpt3b}). Biblioteka QETLAB została przeznaczona specjalnie do weryfikowania separowalności stanów kwantowych i wykorzystuje m.in. kryperium Peresa-Horodeckiego oraz hierarchię kryteriów opisaną w \cite{3}.
+
+\subsection{Przykład}
+
+Zilustrujemy wykorzystanie biblioteki QETLAB do zweryfikowania separowalności stanu działającego w przestrzeni $3 \otimes 3$, przedstawionego w \cite{3}:
+
+$$
+    \rho_{\alpha} = \frac{2}{7} \ket{\psi_{+}} \bra{\psi_{+}} + \frac{\alpha}{7} \sigma_{+} + \frac{5 - \alpha}{7} V \sigma_{+} V,
+$$
+gdzie
+
+$$
+    \ket{\psi_{+}} = \frac{1}{\sqrt{3}} \sum\limits_{i = 0}^{2} \ket{ii},
+$$
+
+$$
+    \sigma_{+} = \frac{1}{3} (\ket{01} \bra{01} + \ket{12} \bra{12} + \ket{20} \bra{20}) = \frac{1}{3}
+    \begin{pmatrix}
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+    \end{pmatrix}
+$$
+natomiast $V$ jest operatorem dokonującym przestawienia podukładów w przestrzni $3 \otimes 3$, który (zob. \cite{tri}) ma reprezentację macierzową
+
+$$
+    V =
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+        0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+    \end{pmatrix}.
+$$
+Ostatecznie, operator $\rho_{\alpha}$ ma reprezentację macierzową
+
+$$
+    \rho_{\alpha} = \frac{1}{21}
+    \begin{pmatrix}
+        2 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 2 \\
+        0 & \alpha & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 5 - \alpha & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 5 - \alpha & 0 & 0 & 0 & 0 & 0 \\
+        2 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 2 \\
+        0 & 0 & 0 & 0 & 0 & \alpha & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & \alpha & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 - \alpha & 0 \\
+        2 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 2 \\
+    \end{pmatrix}
+$$
+
+Zgodnie z wynikiem teoretycznym (udowodnionym w \cite{work}) stan ten spełnia kryterium Peresa-Horodeckiego (tzn. jego częściowa transpozycja jest operatorem dodatnio określonym) dla $\alpha \in [1, 4]$ i jest separowalny dla $\alpha \in [2, 3]$. Wybierając odpowiednie wartości $\alpha$ można zweryfikować to twierdzenie posługując się następującym kodem:
+
+\lstinputlisting[frame=rlbt,language=matlab]{../scripts/verify.m}
+
+\newpage
+
+\lstinputlisting[frame=rlbt,language=matlab]{../scripts/main.m}
+
+Po załadowaniu powyższych skryptów poniższe wywołania funkcji \verb+main+ w konsoli środowiska MATLAB dają następujący efekt:
+
+\begin{verbatim}
+>> main(0.5);
+   ppt: 0; separable: 0
+>> main(1.5);
+   ppt: 1; separable: 0
+>> main(2.5);
+   ppt: 1; separable: 1
+>> main(3.5)
+   ppt: 1; separable: 0
+>> main(4.5)
+   ppt: 0; separable: 0
+\end{verbatim}
